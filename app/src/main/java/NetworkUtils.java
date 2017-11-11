@@ -1,9 +1,11 @@
 import android.net.Uri;
 import android.renderscript.ScriptGroup;
+import android.util.Log;
 
 import com.example.jelani.whowroteit.MainActivity;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -58,10 +60,27 @@ public class NetworkUtils {
                 return null;
             }
 
+            bookJSONString = buffer.toString();
 
-        }catch (Exception e){
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
 
         }finally {
+            if (urlConnection != null){
+                urlConnection.disconnect();
+            }
+            if (reader != null){
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            Log.d(LOG_TAG,bookJSONString);
             return bookJSONString;
         }
     }
