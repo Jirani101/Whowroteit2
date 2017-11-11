@@ -1,8 +1,11 @@
 import android.net.Uri;
+import android.renderscript.ScriptGroup;
 
 import com.example.jelani.whowroteit.MainActivity;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
@@ -35,6 +38,25 @@ public class NetworkUtils {
 
             URL requestURL = new URL(builtUri.toString());
 
+            urlConnection = (HttpURLConnection)requestURL.openConnection();
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+
+            //Read the response using an InputStream and a StreamBuffer, then convert it to a String
+            InputStream inputStream = urlConnection.getInputStream();
+            StringBuffer buffer = new StringBuffer();
+            if (inputStream == null){
+                return null;
+            }
+            reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while((line = reader.readLine()) != null){
+                buffer.append(line + "\n");
+            }
+            if (buffer.length() == 0){
+                //Stream was empty. No point in parsing
+                return null;
+            }
 
 
         }catch (Exception e){
