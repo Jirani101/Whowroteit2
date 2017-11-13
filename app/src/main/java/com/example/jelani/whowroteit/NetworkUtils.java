@@ -1,15 +1,13 @@
-import android.net.Uri;
-import android.renderscript.ScriptGroup;
-import android.util.Log;
+package com.example.jelani.whowroteit;
 
-import com.example.jelani.whowroteit.MainActivity;
+import android.net.Uri;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 
 /**

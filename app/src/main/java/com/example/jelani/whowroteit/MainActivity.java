@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getName();
@@ -25,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
     public void searchBooks(View view) {
         String queryString = mBookInput.getText().toString();
         Log.i(TAG,"Searched " + queryString);
+        if (queryString.length()!= 0) {
+            new FetchBook(mTitleText, mAuthorTitle).execute(queryString);
+
+        }else{
+            Toast.makeText(this,"Please enter a search term", Toast.LENGTH_SHORT).show();
+        }
 
 
     }
